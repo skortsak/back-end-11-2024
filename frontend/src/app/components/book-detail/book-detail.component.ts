@@ -13,17 +13,33 @@ import { map, switchMap } from 'rxjs/operators';
 export class BookDetailComponent implements OnInit {
   book$!: Observable<Book>;
 
-
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.book$ = this.route.params
-      .pipe(map(params => params['id']))
-      .pipe(switchMap(id => this.bookService.getBook(id)))
+      .pipe(
+        map(params => params['id']),
+        switchMap(id => this.bookService.getBook(id))
+      );
   }
 
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'AVAILABLE':
+        return 'primary';
+      case 'BORROWED':
+        return 'warn';
+      case 'RETURNED':
+        return 'accent';
+      case 'DAMAGED':
+        return 'warn';
+      case 'PROCESSING':
+        return 'primary';
+      default:
+        return 'default';
+    }
+  }
 }

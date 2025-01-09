@@ -41,4 +41,8 @@ export class BookService {
     return this.http.delete<void>(url, {params});
   }
 
+  searchBooks(searchText: string): Observable<Book[]> {
+    const params = new HttpParams().set('searchText', searchText);
+    return this.http.get<Book[]>(this.baseUrl + '/searchBooks', { params });
+  }
 }

@@ -1,34 +1,33 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BookService } from '../../services/book.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CheckoutService } from '../../services/checkout.service';
 import { Page } from '../../models/page';
-import { Book } from '../../models/book';
+import { Checkout } from '../../models/checkout';
 
 @Component({
-  selector: 'app-books-list',
-  templateUrl: './books-list.component.html',
-  styleUrls: ['./books-list.component.scss']
+  selector: 'app-checkouts',
+  templateUrl: './checkout.component.html',
+  styleUrls: ['./checkout.component.scss']
 })
-export class BooksListComponent implements OnInit {
-  displayedColumns: string[] = ['title', 'author', 'genre', 'year', 'status'];
-  dataSource = new MatTableDataSource<Book>();
+export class CheckoutComponent implements OnInit {
+  displayedColumns: string[] = ['borrower', 'bookTitle', 'checkedOutDate', 'dueDate', 'returnedDate'];
+  dataSource = new MatTableDataSource<Checkout>();
 
   totalElements = 0;
   pageSize = 10;
-  searchText: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private bookService: BookService) {}
+  constructor(private checkoutService: CheckoutService) {}
 
   ngOnInit(): void {
-    this.loadBooks();
+    this.loadCheckouts();
   }
 
-  loadBooks(): void {
+  loadCheckouts(): void {
     const pageIndex = this.paginator?.pageIndex || 0;
     const pageSize = this.paginator?.pageSize || this.pageSize;
     const sortDirection = this.sort?.direction || 'asc';
@@ -41,22 +40,17 @@ export class BooksListComponent implements OnInit {
       direction: sortDirection
     };
 
-    this.bookService.getBooks(filter).subscribe((page: Page<Book>) => {
+    this.checkoutService.getCheckouts(filter).subscribe((page: Page<Checkout>) => {
       this.dataSource.data = page.content;
       this.totalElements = page.totalElements;
     });
   }
 
   onPaginatorChange(): void {
-    this.loadBooks();
+    this.loadCheckouts();
   }
 
   onSortChange(): void {
-    this.loadBooks();
-  }
-
-  onSearch(event: any): void {
-    this.searchText = event.target.value;
-    this.loadBooks();
+    this.loadCheckouts();
   }
 }
