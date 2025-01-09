@@ -1,0 +1,28 @@
+<div>{{message}}</div>
+<br>
+<form #addProductForm="ngForm" (submit)="onSubmit(addProductForm)">
+    <label>Name</label> <br>
+    <input name="name" ngModel type="text"> <br>
+    <label>Price</label> <br>
+    <input name="price" ngModel type="text"> <br>
+    <label>Active</label> <br>
+    <input name="active" ngModel type="text"> <br>
+    <label>Image</label> <br>
+    <input name="image" ngModel type="text"> <br>
+    <label>Category</label> <br>
+    <select name="category" ngModel>
+      @for (category of categories; track category.id) {
+        <option value={{category.id}}>{{category.name}}</option>
+      }
+    </select>
+    <br>
+    <label>Protein</label> <br>
+    <input name="protein" ngModel type="text"> <br>
+    <label>Carbohydrate</label> <br>
+    <input name="carbohydrate" ngModel type="text"> <br>
+    <label>Fat</label> <br>
+    <input name="fat" ngModel type="text"> <br>
+    <label>Characteristics</label> <br>
+    <input name="characteristic" ngModel type="text"> <br>
+    <button>Sisesta</button>
+  </form>

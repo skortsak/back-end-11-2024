@@ -1,0 +1,27 @@
+@for (cartRow of cart; track cartRow) {
+    <div>{{ cartRow.product.name }}</div>
+    <div>{{ cartRow.product.price }} €</div>
+    <button (click)="decreaseQuqantity(cartRow)">-</button>
+    <div>{{ cartRow.quantity }} tk</div>
+    <button (click)="increaseQuqantity(cartRow)">+</button>
+    <div>{{ (cartRow.product.price * cartRow.quantity).toFixed(2) }} €</div>
+    <button (click)="deleteFromCart($index)">Delete from cart</button>
+}
+
+<div>Total: {{(calculateCartSum().toFixed(2))}} €</div>
+
+<br><br>
+
+<button (click)="saveOrder()">Order</button>
+
+<br><br>
+
+<button (click)="getPMs('ee')">Eesti</button>
+<button (click)="getPMs('lv')">Läti</button>
+<button (click)="getPMs('lt')">Leedu</button>
+
+<select>
+@for (pm of parcelMachines; track pm) {
+    <option>{{pm.NAME}}</option>
+}
+</select>

@@ -1,0 +1,11 @@
+{
+    "nav": {
+        "cart": "Ostukorv",
+        "login": "Logi sisse",
+        "signup": "Registreeru"
+    },
+    "home": {
+        "add-to-cart": "Lisa ostukorvi",
+        "view": "Vaata"
+    }
+}

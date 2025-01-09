@@ -1,0 +1,10 @@
+<br>
+<div>{{message}}</div>
+<br>
+<form #loginForm="ngForm" (submit)="onLogin(loginForm)">
+    <label>E-mail</label> <br>
+    <input ngModel name="email" type="text"> <br>
+    <label>Password</label> <br>
+    <input ngModel name="password" type="text"> <br>
+    <button>Login</button>
+</form>

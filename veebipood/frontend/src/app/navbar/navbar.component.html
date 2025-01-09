@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" routerLink="/">Webshop</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/cart">{{"nav.cart" | translate}}</a>
+          </li>
+          @if (admin) {
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin">Admin</a>
+            </li>
+          }
+          </ul>
+          @if (loggedIn) {
+            <ul class="navbar-nav me mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" (click)="logout()">Logout</a>
+              </li>
+            </ul>
+          } @else {
+            <ul class="navbar-nav me mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/login">{{"nav.login" | translate}}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/signup">{{"nav.signup" | translate}}</a>
+              </li>
+            </ul>
+          }
+          <div>{{sum.toFixed(2)}} €</div>
+          <button (click)="useLanguage('en')">en</button>
+          <button (click)="useLanguage('et')">et</button>
+      </div>
+    </div>
+  </nav>

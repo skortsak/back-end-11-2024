@@ -1,0 +1,9 @@
+<label>Kategooria nimi</label> <br>
+<input [(ngModel)]="newCharacteristic" type="text"> <br>
+<button [disabled]="newCharacteristic.length < 2" (click)="addCharacteristics()">Sisesta</button> <br>
+
+@for (characteristic of characteristics; track characteristic) {
+    <div>{{ characteristic.id }}</div>
+    <div>{{ characteristic.name }}</div>
+    <button (click)="removeCharacteristics(characteristic.id)">Kustuta</button>
+ }

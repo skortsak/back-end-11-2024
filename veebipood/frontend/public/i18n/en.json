@@ -1,0 +1,11 @@
+{
+    "nav": {
+        "cart": "Cart",
+        "login": "Login",
+        "signup": "signup"
+    },
+    "home": {
+        "add-to-cart": "Add to cart",
+        "view": "View"
+    }
+}

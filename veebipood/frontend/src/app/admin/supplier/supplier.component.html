@@ -1,0 +1,42 @@
+<input [(ngModel)]="search" (ngModelChange)="searchBooks()" type="text">
+
+<table>
+    <tr>
+      <th>Tarnija</th>
+      <th>ID</th>
+      <th>Nimi</th>
+      <th>Hind</th>
+      <th>Kirjeldus</th>
+      <th>Pilt</th>
+    </tr>
+@for (book of books; track book) {
+    <tr>
+      <td>Books</td>
+      <td>{{ book.id }}</td>
+      <td>{{ book.title }}</td> 
+      <td>{{ book.price }}</td>
+      <td>{{ book.subtitle }}</td>
+      <td><img [style]="{width: '50px'}" src={{book.image}} alt=""></td>
+    </tr>
+}
+@for (product of storeProducts; track product) {
+  <tr>
+    <td>Store API Products</td>
+    <td>{{ product.id }}</td>
+    <td>{{ product.title }}</td> 
+    <td>{{ product.price }}</td>
+    <td>{{ product.description }}</td>
+    <td><img [style]="{width: '50px'}" src={{product.image}} alt=""></td>
+  </tr>
+}
+@for (product of escuelaProducts; track product) {
+  <tr>
+    <td>Escuela JS Products</td>
+    <td>{{ product.id }}</td>
+    <td>{{ product.title }}</td> 
+    <td>{{ product.price }}</td>
+    <td>{{ product.description }}</td>
+    <td><img [style]="{width: '50px'}" src={{parseImage(product.images[0])}} alt=""></td>
+  </tr>
+}
+  </table>

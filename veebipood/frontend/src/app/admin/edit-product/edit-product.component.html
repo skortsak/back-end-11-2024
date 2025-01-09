@@ -1,0 +1,15 @@
+@if (editProductForm) {
+  <form [formGroup]="editProductForm" (submit)="onSubmit()">
+      <label>Name: </label>
+      <input formControlName="name" type="text" > <br>
+      <label>Price: </label>
+      <input formControlName="price" type="text" > <br>
+      <label>Active: </label>
+      <input formControlName="active" type="text" > <br>
+      <!-- <label>Category: </label>
+      <input formControlName="category" type="text" > <br> -->
+      <label>Image: </label>
+      <input formControlName="image" type="text" > <br>
+      <button>Change</button>
+  </form>
+}
