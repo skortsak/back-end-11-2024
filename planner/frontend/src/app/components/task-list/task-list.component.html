@@ -1,0 +1,73 @@
+<div class="me-auto ml-5" style="max-width: 400px; margin-left: 20px;">
+  <label for="searchInput" class="form-label">Search: </label>
+  <input     
+    id="searchInput" 
+    class="form-control" 
+    [(ngModel)]="searched" 
+    (ngModelChange)="filterBySearch()" 
+    type="text" 
+    placeholder="Enter search term"><br>
+</div>
+
+<div class="d-flex align-items-center justify-content-between mb-3" style="margin-left: 20px;">
+  <div class="me-auto">
+    <select class="form-select form-select-lg"(change)="filterByCategory($event)">
+      <option value="0">All categories</option>
+      @for (category of categories; track category.id) {
+        <option [value]="category.id">
+          {{ category.name }}
+        </option>
+      }
+    </select>
+  </div>
+  <button class="m-4 add-button" (click)="addTask()">
+    <i class="bi bi-plus fs-3"></i>
+  </button>
+</div>
+
+<div class="cards-container">
+  @for (task of tasks; track task) {
+    <div class="card" (click)="openModal(task)">
+      <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <label> Completed:  <input disabled [checked]="task.completed" class="form-check-input" type="checkbox"></label><br>
+        <h6 class="card-subtitle text-muted">{{ task.category.name }}</h6>
+        <pre class="card-text">{{ task.description }}</pre>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage >= totalPages">Next</button>
+</div>
+
+@if (selectedTask) {
+  <div class="modal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+
+      <div class="options-container">
+        <button class="dots-button" (click)="toggleOptions($event)">
+          ⋮
+        </button>
+
+        @if (optionsVisible) {
+          <div class="options-menu">
+            <button class="edit-option" (click)="editTask(selectedTask.id)">Edit</button>
+            <button class="delete-option" (click)="deleteTask(selectedTask.id)">Delete</button>
+          </div>
+        }
+      </div>
+
+      <h3>{{ selectedTask.title }}</h3>
+      <label> Completed: <input disabled [checked]="selectedTask.completed" class="form-check-input" type="checkbox"></label><br>
+      <p><strong>Category:</strong> {{ selectedTask.category.name }}</p>
+      <strong>Description:</strong><br>
+      <pre class="pre">{{selectedTask.description}}</pre>
+
+      <button class="close-button" (click)="closeModal()">Close</button>
+    </div>
+  </div>
+}

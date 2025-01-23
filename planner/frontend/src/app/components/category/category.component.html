@@ -1,0 +1,14 @@
+<div>{{ message }}</div>
+<label>Category name: </label> <br>
+<input [(ngModel)]="newCategory" type="text" class="mr-5"> <br>
+<button [disabled]="newCategory.length < 2" (click)="addCategory()" class="save-button">Add</button> 
+<br><br><br>
+
+<ul>
+  @for (category of categories; track category) {
+    <li>
+      {{ category.name }}
+      <button class="delete-button" (click)="deleteCategory(category.id)">Delete</button>
+    </li>
+  }
+</ul>

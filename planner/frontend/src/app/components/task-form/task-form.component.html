@@ -1,0 +1,20 @@
+@if (isLoaded && taskForm) {
+  <form [formGroup]="taskForm" (submit)="onSubmit()">
+    <div class="position-relative">
+      <h5  class="position-absolute top-0 end-0"> {{formatedDate}} </h5><br>
+    </div>
+    <label> Completed: </label>
+    <input formControlName="completed" class="form-check-input" type="checkbox"><br>
+    <label>Title: </label>
+    <input formControlName="title" placeholder="Enter task title" type="text" required />
+    <label>Category: </label>
+    <select formControlName="category" >
+      @for (c of categories; track c.id) {
+        <option value={{c.id}}>{{c.name}}</option>
+      }
+    </select>
+    <label>Description: </label>
+    <textarea formControlName="description" placeholder="Enter task description" type="text"></textarea>
+    <button type="submit">{{ taskForm.get('title')?.value ? 'Update Task' : 'Create Task' }}</button>
+  </form>
+}
